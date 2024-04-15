@@ -257,7 +257,14 @@ class ApiService implements SingletonInterface
                 ]
             );
         } catch (GuzzleException $ex) {
-            $this->logger->alert('cannot send subscribe email: ' . $ex->getMessage(), [$ex]);
+            // Because CleverReach sends a generic 403 error if the email address is deemed to be spam (which happens
+            // frequently), and there is no way to distinguish this from any other reason an email address is forbidden,
+            // we log this as a warning instead of an error.
+            if ($ex instanceof BadResponseException && (int)$ex->getCode() === 403) {
+                $this->logger->warning('Subscription forbidden: ' . $ex->getMessage(), [$ex]);
+            } else {
+                $this->logger->error('Cannot send subscribe email: ' . $ex->getMessage(), [$ex]);
+            }
         }
     }
 

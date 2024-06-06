@@ -25,3 +25,9 @@
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('@import \'EXT:cleverreach/Configuration/TsConfig/NewElementWizard.tsconfig\';');
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cleverreachPluginPermissionUpdater'] =
+    \Supseven\Cleverreach\Updates\PluginPermissionUpdater::class;
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cleverreachPluginNameUpdater'] =
+    \Supseven\Cleverreach\Updates\PluginNameUpdater::class;

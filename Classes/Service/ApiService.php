@@ -12,8 +12,8 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 class ApiService implements SingletonInterface
 {
-    public const MODE_OPTIN = 'optin';
-    public const MODE_OPTOUT = 'optout';
+    public const string MODE_OPTIN = 'optin';
+    public const string MODE_OPTOUT = 'optout';
 
     private bool $connected = false;
 

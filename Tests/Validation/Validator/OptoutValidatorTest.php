@@ -85,12 +85,16 @@ class OptoutValidatorTest extends LocalBaseTestCase
     {
         $config = $this->createStub(ConfigurationService::class);
         $config->method('isTestEmail')->willReturn(false);
-        $config->method('getCurrentNewsletters')->willReturn([
-            1 => [
-                'label'  => 'FirstNewsletter',
-                'formId' => '2',
-            ],
-        ]);
+        $config->method('getNewsletterForGroup')->willReturnCallback(function ($groupId) {
+            return match ($groupId) {
+                1 => [
+                    'groupId' => 1,
+                    'label'   => 'FirstNewsletter',
+                    'formId'  => '2',
+                ],
+                default => null,
+            };
+        });
 
         return $config;
     }

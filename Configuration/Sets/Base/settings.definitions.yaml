@@ -55,7 +55,8 @@ settings:
     default: 'delete'
     enum:
       delete: 'Delete'
-      unscribe: 'Unscribe'
+      doubleoptout: 'Double Opt-out'
+      inactive: 'Set inactive'
 
   supseven.cleverreach.dataProtection.owner:
     label: Owner name

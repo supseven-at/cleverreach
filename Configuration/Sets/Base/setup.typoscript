@@ -14,7 +14,10 @@ plugin.tx_cleverreach.settings {
     }
 
     newsletter {
+        # UID of the page (-tree) this newsletters
+        # are available in
         1 {
+            # indexed array
             1 {
                 groupId = {$supseven.cleverreach.groupId}
                 label = {$supseven.cleverreach.groupName}

@@ -47,8 +47,6 @@ class CleverreachFinisher extends AbstractFinisher
     /**
      * Executes this finisher
      * @see AbstractFinisher::execute()
-     *
-     * @throws FinisherException
      */
     protected function executeInternal(): void
     {

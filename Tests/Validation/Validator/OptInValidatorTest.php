@@ -45,14 +45,14 @@ class OptInValidatorTest extends LocalBaseTestCase
         $noEmail = new RegistrationRequest('', true, 1);
         $invalidEmail = new RegistrationRequest('abc', true, 1);
         $notAgreed = new RegistrationRequest('abc@domain.tld', false, 1);
-        $invalidGroup = new RegistrationRequest('abc@domain.tld', true, 3);
+        $unknownNewsletter = new RegistrationRequest('abc@domain.tld', true, 3);
 
         return [
-            'No model'      => [null, 10001],
-            'Missing Email' => [$noEmail, 10002],
-            'Invalid Email' => [$invalidEmail, 10002],
-            'Not agreed'    => [$notAgreed, 10003],
-            'Invalid group' => [$invalidGroup, 10004],
+            'No model'           => [null, 10001],
+            'Missing Email'      => [$noEmail, 10002],
+            'Invalid Email'      => [$invalidEmail, 10002],
+            'Not agreed'         => [$notAgreed, 10003],
+            'unknown newsletter' => [$unknownNewsletter, 10004],
         ];
     }
 
@@ -95,12 +95,16 @@ class OptInValidatorTest extends LocalBaseTestCase
     {
         $config = $this->createStub(ConfigurationService::class);
         $config->method('isTestEmail')->willReturn(false);
-        $config->method('getCurrentNewsletters')->willReturn([
-            1 => [
-                'label'  => 'FirstNewsletter',
-                'formId' => '2',
-            ],
-        ]);
+        $config->method('getNewsletterForGroup')->willReturnCallback(function ($groupId) {
+            return match ($groupId) {
+                1 => [
+                    'groupId' => 1,
+                    'label'   => 'FirstNewsletter',
+                    'formId'  => '2',
+                ],
+                default => null,
+            };
+        });
 
         return $config;
     }

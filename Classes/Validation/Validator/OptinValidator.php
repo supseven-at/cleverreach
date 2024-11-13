@@ -43,13 +43,9 @@ class OptinValidator extends AbstractValidator
             $this->result->forProperty('agreed')->addError(new Error('Not accepted', 10003));
         }
 
-        $newsletters = $this->configurationService->getCurrentNewsletters();
+        $newsletter = $this->configurationService->getNewsletterForGroup($value->groupId);
 
-        if (empty($newsletters)) {
-            $this->result->forProperty('groupId')->addError(new Error('no group ID', 1594194662));
-        }
-
-        if (empty($newsletters[$value->groupId]['formId'])) {
+        if (!is_array($newsletter) && empty($newsletter['formId'])) {
             $this->result->forProperty('groupId')->addError(new Error('unknown newsletter', 10004));
         }
 

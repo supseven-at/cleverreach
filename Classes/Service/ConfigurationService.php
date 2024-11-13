@@ -24,7 +24,7 @@ class ConfigurationService implements SingletonInterface
 
     public function getConfiguration()
     {
-        return $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_cleverreach.']['settings.'];
+        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getSetupArray()['plugin.']['tx_cleverreach.']['settings.'];
     }
 
     /**
@@ -92,10 +92,38 @@ class ConfigurationService implements SingletonInterface
 
     public function getCurrentNewsletters(): ?array
     {
-        return $this->getNewsletters((int)$GLOBALS['TSFE']->rootLine[0]['uid']);
+        $rootline = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.page.information')->getLocalRootLine();
+        $result = null;
+
+        foreach ($rootline as $page) {
+            $found = $this->getNewsletters($page['uid']);
+
+            if ($found) {
+                $result = $found;
+                break;
+            }
+        }
+
+        return $result;
     }
 
-    public function getNewsletters(int $uid): ?array
+    public function getNewsletterForGroup(string|int $groupId): ?array
+    {
+        $groupId = (string)$groupId;
+        $result = null;
+        $newsletters = $this->getCurrentNewsletters();
+
+        foreach ($newsletters as $newsletter) {
+            if ((string)$newsletter['groupId'] === $groupId) {
+                $result = $newsletter;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    protected function getNewsletters(int $uid): ?array
     {
         $found = $this->getConfiguration()['newsletter.'][$uid . '.'] ?? null;
         $result = [];

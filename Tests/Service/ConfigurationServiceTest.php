@@ -7,6 +7,8 @@ namespace Supseven\Cleverreach\Tests\Service;
 use PHPUnit\Framework\Attributes\Test;
 use Supseven\Cleverreach\Service\ConfigurationService;
 use Supseven\Cleverreach\Tests\LocalBaseTestCase;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
 
 /**
  * @author Georg Großberger <g.grossberger@supseven.at>
@@ -24,9 +26,7 @@ class ConfigurationServiceTest extends LocalBaseTestCase
         $formId = 123456;
         $unsubscribeMethod = 'unsubscribemethod';
 
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->tmpl = new \stdClass();
-        $GLOBALS['TSFE']->tmpl->setup = [
+        $settings = [
             'plugin.' => [
                 'tx_cleverreach.' => [
                     'settings.' => [
@@ -41,6 +41,12 @@ class ConfigurationServiceTest extends LocalBaseTestCase
                 ],
             ],
         ];
+
+        $ts = new \TYPO3\CMS\Core\TypoScript\FrontendTypoScript(new RootNode(), [], [], []);
+        $ts->setSetupArray($settings);
+
+        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())->withAttribute('frontend.typoscript', $ts);
+
         $subject = new ConfigurationService();
 
         self::assertEquals($restUrl, $subject->getRestUrl());

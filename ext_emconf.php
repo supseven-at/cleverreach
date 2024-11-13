@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 $EM_CONF[$_EXTKEY] = [
     'title'        => 'CleverReach',
-    'description'  => 'Finishers and validators for EXT:form and Powermail',
+    'description'  => 'CleverReach plugin and finishers and validators for EXT:form',
     'category'     => 'misc',
     'state'        => 'stable',
     'author'       => 'Supseven',

@@ -1,17 +1,13 @@
-# TYPO3 Extension ``cleverreach`` 
+# TYPO3 Extension ``cleverreach``
 
-A plugin for optin/opt out as well as finishers and validators for the TYPO3 
-extensions *form* and *powermail*
+A plugin for optin/opt out as well as finishers and validators for the TYPO3
+extensions *form*
 
 Based on [wapplersystems/cleverreach](https://github.com/WapplerSystems/cleverreach)
 
 ## Features
 
 - Plugin with optin and opt out
-- Powermail
-  - validators
-  - finishers
-  - condition example for a contact form
 - Form
   - form examples: Opt in, Opt out, contact
   - finisher

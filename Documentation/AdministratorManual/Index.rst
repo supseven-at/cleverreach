@@ -20,4 +20,3 @@ For administrators
 	:titlesonly:
 
 	Installation/Index
-	Powermail/Index

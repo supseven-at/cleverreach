@@ -1,6 +1,6 @@
 {
     "name": "supseven/cleverreach",
-    "description": "CleverReach plugin as well as finishers and validators for EXT:form",
+    "description": "CleverReach plugin and finishers and validators for EXT:form",
     "type": "typo3-cms-extension",
     "license": "GPL-2.0-or-later",
     "authors": [

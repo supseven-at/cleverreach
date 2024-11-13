@@ -20,4 +20,3 @@ For editors
 	:titlesonly:
 
 	Form/Index
-	Powermail/Index

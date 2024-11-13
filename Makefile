@@ -13,10 +13,10 @@ coverage: vendor/autoload.php
 	$(PHP_BIN) vendor/bin/phpunit -c phpunit.xml --coverage-html reports
 
 lint: vendor/autoload.php
-	$(PHP_BIN) vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --diff -vvv --dry-run
+	$(PHP_BIN) vendor/bin/php-cs-fixer check --diff -vvv
 
 fix: vendor/autoload.php
-	$(PHP_BIN) vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --diff -vvv
+	$(PHP_BIN) vendor/bin/php-cs-fixer fix --diff -vvv
 
 vendor/autoload.php: composer.json composer.lock
 	composer install --prefer-dist --no-interaction --ansi --no-progress --no-plugins --no-scripts

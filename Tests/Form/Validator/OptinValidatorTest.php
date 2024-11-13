@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Supseven\Cleverreach\Tests\Form\Validator;
 
+use PHPUnit\Framework\Attributes\Test;
 use Supseven\Cleverreach\Form\Validator\OptinValidator;
 use Supseven\Cleverreach\Service\ApiService;
 use Supseven\Cleverreach\Tests\LocalBaseTestCase;
@@ -13,6 +14,7 @@ use Supseven\Cleverreach\Tests\LocalBaseTestCase;
  */
 class OptinValidatorTest extends LocalBaseTestCase
 {
+    #[Test]
     public function testIsValid(): void
     {
         $email = 'somebody@domain.tld';
@@ -33,6 +35,7 @@ class OptinValidatorTest extends LocalBaseTestCase
         self::assertFalse($result->hasErrors());
     }
 
+    #[Test]
     public function testIsNotValidAlreadyRegistered(): void
     {
         $email = 'somebody@domain.tld';
@@ -47,9 +50,9 @@ class OptinValidatorTest extends LocalBaseTestCase
             $apiService,
             $this->getConfiguration()
         ) extends OptinValidator {
-            public function translateErrorMessage($translateKey, $extensionName, $arguments = []): string
+            public function translateErrorMessage(string $translateKey, string $extensionName = '', array $arguments = []): string
             {
-                return (string)$translateKey;
+                return $translateKey;
             }
         };
         $subject->setOptions($options);
@@ -58,6 +61,7 @@ class OptinValidatorTest extends LocalBaseTestCase
         self::assertTrue($result->hasErrors());
     }
 
+    #[Test]
     public function testIsNotValidNoEmail(): void
     {
         $email = 'Some Body';
@@ -69,9 +73,9 @@ class OptinValidatorTest extends LocalBaseTestCase
             $apiService,
             $this->getConfiguration()
         ) extends OptinValidator {
-            public function translateErrorMessage($translateKey, $extensionName, $arguments = []): string
+            public function translateErrorMessage(string $translateKey, string $extensionName = '', array $arguments = []): string
             {
-                return (string)$translateKey;
+                return $translateKey;
             }
         };
         $subject->setOptions($options);

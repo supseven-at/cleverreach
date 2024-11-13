@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Supseven\Cleverreach\Tests\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use Supseven\Cleverreach\Service\ConfigurationService;
 use Supseven\Cleverreach\Tests\LocalBaseTestCase;
 
@@ -12,6 +13,7 @@ use Supseven\Cleverreach\Tests\LocalBaseTestCase;
  */
 class ConfigurationServiceTest extends LocalBaseTestCase
 {
+    #[Test]
     public function testGetFromGlobalTypoScript(): void
     {
         $restUrl = 'https://api.service.com';

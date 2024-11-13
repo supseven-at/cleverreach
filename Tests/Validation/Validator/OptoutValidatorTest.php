@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Supseven\Cleverreach\Tests\Validation\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\Stub;
 use Supseven\Cleverreach\DTO\RegistrationRequest;
 use Supseven\Cleverreach\Service\ApiService;
 use Supseven\Cleverreach\Service\ConfigurationService;
@@ -16,10 +19,11 @@ use Supseven\Cleverreach\Validation\Validator\OptoutValidator;
 class OptoutValidatorTest extends LocalBaseTestCase
 {
     /**
-     * @dataProvider validateDataProvider
-     * @param RegistrationRequest $receiver
+     * @param RegistrationRequest|null $receiver
      * @param int $expectedErrorCode
      */
+    #[Test]
+    #[DataProvider('validateDataProvider')]
     public function testValidate(?RegistrationRequest $receiver, int $expectedErrorCode): void
     {
         $api = $this->createMock(ApiService::class);
@@ -33,7 +37,7 @@ class OptoutValidatorTest extends LocalBaseTestCase
         self::assertSame($expectedErrorCode, $error->getCode());
     }
 
-    public function validateDataProvider(): array
+    public static function validateDataProvider(): array
     {
         $noEmail = new RegistrationRequest('', true, 1);
         $invalidEmail = new RegistrationRequest('abc', true, 1);
@@ -47,6 +51,7 @@ class OptoutValidatorTest extends LocalBaseTestCase
         ];
     }
 
+    #[Test]
     public function testValidateCorrect(): void
     {
         $api = $this->createMock(ApiService::class);
@@ -60,6 +65,7 @@ class OptoutValidatorTest extends LocalBaseTestCase
         self::assertSame([], $result->getFlattenedErrors());
     }
 
+    #[Test]
     public function testValidateUnregistered(): void
     {
         $api = $this->createMock(ApiService::class);
@@ -75,7 +81,7 @@ class OptoutValidatorTest extends LocalBaseTestCase
         self::assertSame(20005, $error->getCode());
     }
 
-    private function getConfigrationServiceStub()
+    private function getConfigrationServiceStub(): ConfigurationService&Stub
     {
         $config = $this->createStub(ConfigurationService::class);
         $config->method('isTestEmail')->willReturn(false);

@@ -7,6 +7,7 @@ namespace Supseven\Cleverreach\Tests\Service;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\RequestOptions;
+use PHPUnit\Framework\Attributes\Test;
 use Supseven\Cleverreach\Service\RestService;
 use Supseven\Cleverreach\Tests\LocalBaseTestCase;
 use TYPO3\CMS\Core\Http\RequestFactory;
@@ -16,6 +17,7 @@ use TYPO3\CMS\Core\Http\RequestFactory;
  */
 class RestServiceTest extends LocalBaseTestCase
 {
+    #[Test]
     public function testPut(): void
     {
         $method = 'PUT';
@@ -25,6 +27,7 @@ class RestServiceTest extends LocalBaseTestCase
         $this->testRequest($params, '{"resp": "abc"}', ['resp' => 'abc'], $method);
     }
 
+    #[Test]
     public function testDelete(): void
     {
         $method = 'DELETE';
@@ -34,6 +37,7 @@ class RestServiceTest extends LocalBaseTestCase
         $this->testRequest($params, '{"resp": "abc"}', ['resp' => 'abc'], $method);
     }
 
+    #[Test]
     public function testPost(): void
     {
         $method = 'POST';
@@ -43,6 +47,7 @@ class RestServiceTest extends LocalBaseTestCase
         $this->testRequest($params, '{"resp": "abc"}', ['resp' => 'abc'], $method);
     }
 
+    #[Test]
     public function testGet(): void
     {
         $method = 'GET';
@@ -56,7 +61,6 @@ class RestServiceTest extends LocalBaseTestCase
      * @param array|null $requestParams
      * @param string $responseBody
      * @param string|array $expected
-     * @param string $path
      * @param string $method
      */
     protected function testRequest(?array $requestParams, string $responseBody, string | array $expected, string $method): void

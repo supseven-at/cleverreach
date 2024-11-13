@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Supseven\Cleverreach\Tests\Form\Finishers;
 
+use PHPUnit\Framework\Attributes\Test;
 use Supseven\Cleverreach\DTO\Receiver;
 use Supseven\Cleverreach\Form\Finishers\CleverreachFinisher;
 use Supseven\Cleverreach\Service\ApiService;
@@ -18,6 +19,7 @@ use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
  */
 class CleverreachFinisherTest extends LocalBaseTestCase
 {
+    #[Test]
     public function testOptIn(): void
     {
         $groupId = '123';
@@ -70,6 +72,7 @@ class CleverreachFinisherTest extends LocalBaseTestCase
         $subject->execute($ctx);
     }
 
+    #[Test]
     public function testOptOut(): void
     {
         $groupId = '123';

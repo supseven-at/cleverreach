@@ -7,6 +7,8 @@ namespace Supseven\Cleverreach\Tests\Service;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Log\NullLogger;
 use Supseven\Cleverreach\DTO\Receiver;
 use Supseven\Cleverreach\Service\ApiService;
@@ -18,6 +20,7 @@ use Supseven\Cleverreach\Tests\LocalBaseTestCase;
  */
 class ApiServiceTest extends LocalBaseTestCase
 {
+    #[Test]
     public function testConnect(): void
     {
         $params = [
@@ -41,10 +44,11 @@ class ApiServiceTest extends LocalBaseTestCase
     }
 
     /**
-     * @dataProvider receiversProvider
      * @param $receivers
      * @param $groupId
      */
+    #[Test]
+    #[DataProvider('receiversProvider')]
     public function testAddReceiversToGroup($receivers, $groupId): void
     {
         $groupId ??= 123;
@@ -77,7 +81,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertTrue($subject->addReceiversToGroup($receivers, $groupId));
     }
 
-    public function receiversProvider(): \Generator
+    public static function receiversProvider(): \Generator
     {
         $receiver1 = Receiver::create('example@domain.com');
 
@@ -90,6 +94,7 @@ class ApiServiceTest extends LocalBaseTestCase
         yield 'One receiver string, with group ID' => ['someone@domain.com', 789];
     }
 
+    #[Test]
     public function testRemoveReceiversFromGroup(): void
     {
         $rest = $this->createMock(RestService::class);
@@ -101,6 +106,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->removeReceiversFromGroup('456');
     }
 
+    #[Test]
     public function testActivateReceiversInGroup(): void
     {
         $rest = $this->createMock(RestService::class);
@@ -112,6 +118,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->activateReceiversInGroup('456');
     }
 
+    #[Test]
     public function testDisableReceiversInGroup(): void
     {
         $rest = $this->createMock(RestService::class);
@@ -123,6 +130,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->disableReceiversInGroup('456');
     }
 
+    #[Test]
     public function testGetGroup(): void
     {
         $expected = ['name' => 'abc'];
@@ -138,6 +146,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertEquals($expected, $actual);
     }
 
+    #[Test]
     public function testIsReceiverOfGroupFound(): void
     {
         $rest = $this->createMock(RestService::class);
@@ -152,6 +161,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertTrue($result);
     }
 
+    #[Test]
     public function testIsReceiverOfGroupNotFound(): void
     {
         $exception = new BadResponseException(
@@ -171,6 +181,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertFalse($result);
     }
 
+    #[Test]
     public function testGetReceiverOfGroupFound(): void
     {
         $data = [
@@ -195,6 +206,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertEquals($expected, $actual);
     }
 
+    #[Test]
     public function testGetReceiverOfGroupNotFound(): void
     {
         $exception = new BadResponseException(
@@ -214,6 +226,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertNull($result);
     }
 
+    #[Test]
     public function testIsReceiverOfGroupAndActiveFound(): void
     {
         $data = [
@@ -236,6 +249,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertTrue($result);
     }
 
+    #[Test]
     public function testIsReceiverOfGroupAndActiveNotFound(): void
     {
         $data = [
@@ -258,6 +272,7 @@ class ApiServiceTest extends LocalBaseTestCase
         self::assertFalse($result);
     }
 
+    #[Test]
     public function testSendSubscribeMail(): void
     {
         $_SERVER['REMOTE_ADDR'] = '1.2.3.4';
@@ -286,6 +301,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->sendSubscribeMail($email, $formId, $groupId);
     }
 
+    #[Test]
     public function testSendSubscribeMailDoesNotFailOnEmptyServerVars(): void
     {
         $email = 'someone@domain.tld';
@@ -311,6 +327,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->sendSubscribeMail($email, $formId, $groupId);
     }
 
+    #[Test]
     public function testSendUnsubscribeMail(): void
     {
         $_SERVER['REMOTE_ADDR'] = '1.2.3.4';
@@ -339,6 +356,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->sendUnsubscribeMail($email, $formId, $groupId);
     }
 
+    #[Test]
     public function testSendUnsubscribeMailDoesNotFailOnEmptyServerVars(): void
     {
         $email = 'someone@domain.tld';
@@ -364,6 +382,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->sendUnsubscribeMail($email, $formId, $groupId);
     }
 
+    #[Test]
     public function testSetAttributeOfReceiver(): void
     {
         $email = 'someone@domain.tld';
@@ -383,6 +402,7 @@ class ApiServiceTest extends LocalBaseTestCase
         $subject->setAttributeOfReceiver($email, $attribute, $value);
     }
 
+    #[Test]
     public function testDeleteReceiver(): void
     {
         $email = 'someone@domain.tld';

@@ -7,16 +7,11 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $container, ContainerBuilder $containerBuilder): void {
     $services = $container->services();
-    $services->defaults()->private()->autowire()->autoconfigure();
+    $services->defaults()->public()->autowire()->autoconfigure();
 
-    $services->set(\Supseven\Cleverreach\Controller\NewsletterController::class);
-    $services->set(\Supseven\Cleverreach\Form\Finishers\CleverreachFinisher::class);
-    $services->set(\Supseven\Cleverreach\Form\Validator\OptinValidator::class);
-    $services->set(\Supseven\Cleverreach\Form\Validator\OptoutValidator::class);
-    $services->set(\Supseven\Cleverreach\Service\ApiService::class);
-    $services->set(\Supseven\Cleverreach\Service\ConfigurationService::class);
-    $services->set(\Supseven\Cleverreach\Service\RestService::class);
-    $services->set(\Supseven\Cleverreach\Service\SubscriptionService::class);
-    $services->set(\Supseven\Cleverreach\Validation\Validator\OptinValidator::class);
-    $services->set(\Supseven\Cleverreach\Validation\Validator\OptoutValidator::class);
+    $services->load('Supseven\\Cleverreach\\Controller\\', __DIR__ . '/../Classes/Controller/*');
+    $services->load('Supseven\\Cleverreach\\Form\\', __DIR__ . '/../Classes/Form/*');
+    $services->load('Supseven\\Cleverreach\\Service\\', __DIR__ . '/../Classes/Service/*');
+    $services->load('Supseven\\Cleverreach\\Updates\\', __DIR__ . '/../Classes/Updates/*');
+    $services->load('Supseven\\Cleverreach\\Validation\\Validator\\', __DIR__ . '/../Classes/Validation/Validator/*');
 };

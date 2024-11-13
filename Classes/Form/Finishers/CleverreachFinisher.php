@@ -20,16 +20,6 @@ use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
 class CleverreachFinisher extends AbstractFinisher
 {
     /**
-     * @var ApiService
-     */
-    protected ApiService $api;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $configurationService;
-
-    /**
      * @var array
      */
     protected $defaultOptions = [];
@@ -38,10 +28,10 @@ class CleverreachFinisher extends AbstractFinisher
      * @param ApiService $api
      * @param ConfigurationService $configurationService
      */
-    public function __construct(ApiService $api, ConfigurationService $configurationService)
-    {
-        $this->api = $api;
-        $this->configurationService = $configurationService;
+    public function __construct(
+        protected readonly ApiService $api,
+        protected readonly ConfigurationService $configurationService
+    ) {
     }
 
     /**

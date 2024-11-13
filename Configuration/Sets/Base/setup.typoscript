@@ -1,0 +1,34 @@
+plugin.tx_cleverreach.settings {
+    clientId = {$supseven.cleverreach.clientId}
+    login = {$supseven.cleverreach.login}
+    password = {$supseven.cleverreach.password}
+    formId = {$supseven.cleverreach.formId}
+    groupId = {$supseven.cleverreach.groupId}
+    restUrl = {$supseven.cleverreach.restUrl}
+    source = {$supseven.cleverreach.source}
+    unsubscribemethod = {$supseven.cleverreach.unsubscribemethod}
+
+    redirect {
+        optin = {$supseven.cleverreach.optinRedirect}
+        optout = {$supseven.cleverreach.optoutRedirect}
+    }
+
+    newsletter {
+        1 {
+            1 {
+                groupId = {$supseven.cleverreach.groupId}
+                label = {$supseven.cleverreach.groupName}
+                formId = {$supseven.cleverreach.formId}
+            }
+        }
+    }
+
+    # used for link generation in gdpr text (checkbox label)
+    dataProtection {
+        0 = {$supseven.cleverreach.dataProtection.owner}
+        1 = {$supseven.cleverreach.dataProtection.owner}
+        2 = {$supseven.cleverreach.dataProtection.pid}
+        3 = {$supseven.cleverreach.dataProtection.pageName}
+    }
+}
+

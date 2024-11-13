@@ -1,0 +1,74 @@
+categories:
+  Cleverreach:
+    label: Cleverreach
+  Cleverreach.Optin:
+    label: Opt-in / Opt-out
+    parent: Cleverreach
+  Cleverreach.dataProtection:
+    label: Data Protection
+    parent: Cleverreach
+
+settings:
+  supseven.cleverreach.clientId:
+    label: Client ID
+    category: Cleverreach
+    type: string
+    default: ''
+  supseven.cleverreach.login:
+    label: Login name
+    category: Cleverreach
+    type: string
+    default: ''
+  supseven.cleverreach.password:
+    label: Password
+    category: Cleverreach
+    type: string
+    default: ''
+  supseven.cleverreach.formId:
+    label: Default Form ID
+    category: Cleverreach
+    type: string
+    default: ''
+  supseven.cleverreach.groupId:
+    label: Default Group ID
+    category: Cleverreach
+    type: string
+    default: ''
+  supseven.cleverreach.restUrl:
+    label: REST API Endpoint URL
+    category: Cleverreach
+    type: string
+    default: 'https://rest.cleverreach.com/v2'
+
+  supseven.cleverreach.optinRedirect:
+    label: Page UID of Opt-In redirect
+    category: Cleverreach.Optin
+    type: int
+  supseven.cleverreach.optoutRedirect:
+    label: Page UID of Opt-Out redirect
+    category: Cleverreach.Optin
+    type: int
+  supseven.cleverreach.unsubscribemethod:
+    label: Unscribe Method
+    category: Cleverreach
+    type: string
+    default: 'delete'
+    enum:
+      delete: 'Delete'
+      unscribe: 'Unscribe'
+
+  supseven.cleverreach.dataProtection.owner:
+    label: Owner name
+    category: Cleverreach.dataProtection
+    type: string
+    default: ''
+  supseven.cleverreach.dataProtection.pid:
+    label: Data Protection page UID
+    category: Cleverreach.dataProtection
+    type: int
+    default: ''
+  supseven.cleverreach.dataProtection.pageName:
+    label: Data Protection page title
+    category: Cleverreach.dataProtection
+    type: string
+    default: ''

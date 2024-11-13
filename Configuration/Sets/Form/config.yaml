@@ -1,0 +1,5 @@
+name: supseven/cleverreach-form
+label: Cleverreach EXT:form integration
+dependencies:
+  - typo3/form
+  - supseven/cleverreach

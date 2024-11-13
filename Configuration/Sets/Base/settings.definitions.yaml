@@ -44,10 +44,12 @@ settings:
     label: Page UID of Opt-In redirect
     category: Cleverreach.Optin
     type: int
+    default: 0
   supseven.cleverreach.optoutRedirect:
     label: Page UID of Opt-Out redirect
     category: Cleverreach.Optin
     type: int
+    default: 0
   supseven.cleverreach.unsubscribemethod:
     label: Unscribe Method
     category: Cleverreach

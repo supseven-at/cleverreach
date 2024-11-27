@@ -29,7 +29,7 @@ jobs:
       - name: Test on PHP ${{ matrix.php }} on TYPO3 ${{ matrix.typo3 }}
         run: |
           composer remove --dev typo3/cms-form
-          composer remove typo3/cms-core typo3/cms-extbase typo3/cms-frontend
+          composer remove typo3/cms-core typo3/cms-extbase typo3/cms-install
           composer require "typo3/cms-core:^${{ matrix.typo3 }}" "typo3/cms-extbase:^${{ matrix.typo3 }}" "typo3/cms-install:^${{ matrix.typo3 }}"
           composer require --dev "typo3/cms-form:^${{ matrix.typo3 }}"
           make unit

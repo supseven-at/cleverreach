@@ -69,7 +69,7 @@ settings:
     label: Data Protection page UID
     category: Cleverreach.dataProtection
     type: int
-    default: ''
+    default: 0
   supseven.cleverreach.dataProtection.pageName:
     label: Data Protection page title
     category: Cleverreach.dataProtection
